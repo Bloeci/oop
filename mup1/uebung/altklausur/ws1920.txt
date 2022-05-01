@@ -1,0 +1,43 @@
+Aufgabe 3
+public static double laenge(int[] vector) {
+	int sumVector = 0;
+	for (int j : vector) {
+		sumVector += j * j;
+	}
+	return Math.sqrt(sumVector);
+}
+
+
+---------
+Aufgabe 4
+public static int minimum(int[] z){
+	if (z.length > 1) {
+		int[] z1 = Arrays.copyOfRange(z, 0, z.length/2);
+		int[] z2 = Arrays.copyOfRange(z, z.length/2, z.length);
+		int m1 = minimum(z1);
+		int m2 = minimum(z2);
+		return Math.min(m1, m2);
+	} else if (z.length == 1){
+		return z[0];
+	} else {
+		return (int)Float.POSITIVE_INFINITY;
+	}
+}
+
+
+---------
+Aufgabe 5
+public Buch neusteAusgabe(String title) {
+	Buch suche = null;
+	int jZ = (int)Float.NEGATIVE_INFINITY;
+	for (Buch buch:katalog) {
+		if (buch.getTitle().equals(title) && buch.getVerfuegbar()) {
+			if (buch.getJahr() > jZ) {
+				jZ = buch.getJahr();
+				suche = buch;
+			}
+		}
+	}
+	return suche;
+}
+

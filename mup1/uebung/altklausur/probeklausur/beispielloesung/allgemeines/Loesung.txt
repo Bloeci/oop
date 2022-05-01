@@ -1,0 +1,9 @@
+// Aufgabe 1:
+//
+// Die Definition einer Klasse in Java umfasst Attribute und Methoden.
+// In Java gibt es neben primitiven Datentypen noch Klassen-Datentypen, zum Beispiel String.
+// Sichtbarkeiten regeln in Java Zugriffsrechte.
+// Ein Interface unterscheidet sich von einer Klasse unter anderem dadurch, dass von Interfaces keine Instanzen erzeugt werden können.
+// Ein wichtiger Unterschied zwischen einem Array und einer ArrayList ist, dass eine Array eine feste Länge hat.
+// Tritt beim Lesen oder Schreiben einer Datei mittels einer Java-Methode ein Fehler auf, wird die Exception IOException geworfen.
+// Mit Threads können mehrere Teile eines Programms nebenläufig ausgeführt werden.

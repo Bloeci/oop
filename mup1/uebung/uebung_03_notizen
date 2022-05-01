@@ -1,0 +1,18 @@
+Schreibweisen lernen !
+	- festgelegte Notationen in Java (groß und kleinschreibung)
+
+Unterschied zwischen
+	- dem besitzt von Attributen und
+	- der sichtbarkeit von Attributen bzw. den Zugriff
+	
+Klassen:
+	- jede Klasse erbt Attribute wie "_toString" von der in
+		Java übergeordneten Basisklasse
+	- für jede Klasse existiert eine Methode this
+		-> Bspw. Vergleich von Datum in der Übung
+		-> + compare(datum: Datum): Datum (VERGLEICH)
+				-> zwei Datumsobjekte zur Verfügung, einmal die Eingabe
+					 und das Objekt self
+					 
+Klasse Film:
+	- altFassungEN -> daher array

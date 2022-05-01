@@ -1,0 +1,113 @@
+%%% Autor: 	Max Beining
+%%% VORLAGE 
+
+%% ALLGEMEINE EINSTELLUNGEN -------------------------------
+\documentclass[11pt, a4paper, DIV=12]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%----------------------------------------------------------
+%% ZUSATZPAKETE					% Verwendung (Bsp.)
+\usepackage{caption}			% ...
+\usepackage{enumitem}			% Aufzaehlung Abstand 0pt
+\usepackage{nicefrac}
+
+
+%% TABELLEN- UND ABBILDUNGEN NAME -------------------------
+\captionsetup[figure]{justification=centerlast}
+\captionsetup[table]{justification=centerlast}
+\KOMAoption{captions}{tableheading}
+\renewcaptionname{ngerman}{\figurename}{Abb.}
+\renewcaptionname{ngerman}{\tablename}{Tab.}
+\addtokomafont{caption}{\small}
+\setcapindent{0pt}
+%----------------------------------------------------------
+\usepackage{listings}			% Anzeigen von Programm-Code
+\usepackage{xcolor}				% Farberweiterung für PC
+
+\definecolor{pblue}{rgb}{0.13,0.13,1}
+\definecolor{pgreen}{rgb}{0,0.5,0}
+\definecolor{pred}{rgb}{0.9,0,0}
+\definecolor{pgrey}{rgb}{0.46,0.45,0.48}
+\lstset{
+	language=Java,
+  	showspaces=false,
+  	showtabs=false,
+  	tabsize=4,
+  	breaklines=true,
+  	showstringspaces=false,
+  	breakatwhitespace=true,
+  	commentstyle=\color{pgreen},
+  	keywordstyle=\color{pblue},
+  	stringstyle=\color{pred},
+  	basicstyle=\ttfamily,
+  	moredelim=[il][\textcolor{pgrey}]
+}
+
+
+% keine Serifenlose Schrift in Gliederung
+\setkomafont{disposition}{\normalcolor\bfseries}
+
+%==============================================================================
+%------------------------------BEGINN DES HAUPTEILS ---------------------------
+%==============================================================================
+\begin{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent
+\textbf{Universität Leipzig, WS~20/21} \vspace*{-0.25cm}
+\section*{Modellierung und Programmierung 1}
+\subsection*{Zusatzaufgabe}
+\noindent
+Autor: Max Beining \\
+\rule{\linewidth}{1pt} \\
+
+%--------------------------------------
+
+\noindent
+\textbf{Aufgabenstellung}: \par
+\noindent
+Erste Schritte in einer Java-Entwicklungsumgebung durch das Einfügen von Code und die Ausgabe in der Konsole, Abgabe in Moodle kennenlernen \par
+
+\vspace{0.8cm}
+\noindent
+\textbf{Programmcode}:
+\begin{small}
+\begin{lstlisting}[language=Java]
+public class Name {
+
+	public static void main(String[] args) {
+		String name = "Max Beining";
+		String eman = "";
+		// Create Loop with condition i ist not equal to length "name"
+		for (int i = 0; i != name.length(); i++) {
+			eman += name.charAt(name.length() - i - 1);
+		}
+		// Print Statement
+		System.out.println(eman);
+	}
+	
+}
+\end{lstlisting}
+\end{small}
+
+\vspace{0.8cm}
+\noindent
+\textbf{Ausgabe (Konsole)}:
+\begin{small}
+\begin{lstlisting}
+	gninieB xaM
+\end{lstlisting}
+\end{small}
+
+
+
+
+
+
+
+
+
+%==============================================================================
+%------------------------------ENDE DES HAUPTEILS -----------------------------
+%==============================================================================
+\end{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

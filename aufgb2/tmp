@@ -1,0 +1,8 @@
+        // collect results, sort with treemap
+        /*StringBuilder result = new StringBuilder();
+        for (String key : statistic.keySet()){
+            float prop = statistic.get(key) / (float)population.getNumberOfButterflies();
+            result.append(String.format("%.1f %%\t| %s\n", (prop * 100), key));
+        }
+
+        return result.toString();*/

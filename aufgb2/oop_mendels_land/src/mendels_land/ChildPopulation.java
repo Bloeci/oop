@@ -32,23 +32,6 @@ public class ChildPopulation {
         return numberOfButterflies;
     }
 
-    /**
-     * Generate a new random sized children population based on the
-     * actual mother and father butterfly.
-     */
-    public void generateNewPopulation() {
-        this.numberOfButterflies = randomNumberChild();
-        this.child = generateChildren();
-    }
-
-    /**
-     * Generate a new random children population based on the
-     * actual mother and father butterfly. Size of the
-     * actual number of children.
-     */
-    public void newChildren() {
-        this.child = generateChildren();
-    }
 
     /**
      * Getter for the actual children population.
@@ -66,15 +49,6 @@ public class ChildPopulation {
         return father;
     }
 
-    /**
-     * Setter for the father butterfly. After that the barrel will generate
-     * a new random children population with new attributes. Same population size.
-     * @param father    New father of the children population.
-     */
-    public void setFather(Butterfly father) {
-        this.father = father;
-        this.child = generateChildren();
-    }
 
     /**
      * Getter of the mother butterfly.
@@ -85,23 +59,13 @@ public class ChildPopulation {
     }
 
     /**
-     * Setter for the mother butterfly. After that the barrel will generate
-     * a new random children population with new attributes. Same population size.
-     * @param mother    New mother of the children population.
-     */
-    public void setMother(Butterfly mother) {
-        this.mother = mother;
-        this.child = generateChildren();
-    }
-
-    /**
      * Generate random number between 1000-2000 (inclusive) for number of
      * butterfly children.
      * @return  int     number of children
      */
     private int randomNumberChild() {
         // return (int)(Math.random() * (2000 + 1 - 1000)) + 1000;
-        return (int)(Math.random() * (20 + 1 - 10)) + 10;
+        return (int)(Math.random() * (2000 + 1 - 1000)) + 1000;
     }
 
     /**
@@ -110,8 +74,6 @@ public class ChildPopulation {
      *                      attributes of the mother and father.
      */
     private ArrayList<Butterfly> generateChildren(){
-        // initialize some lists for all attributes
-        System.out.println("Generate children...");
         String[] patterns = new String[]{this.mother.getPattern(), this.father.getPattern()};
         String[] colors = new String[]{this.mother.getWingColor(), this.father.getWingColor()};
         String[] shapes = new String[]{this.mother.getWingShape(), this.father.getWingShape()};

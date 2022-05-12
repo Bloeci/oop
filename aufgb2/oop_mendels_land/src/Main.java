@@ -2,18 +2,20 @@ import mendels_land.Butterfly;
 import mendels_land.ChildPopulation;
 import mendels_land.MendelLand;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Collection;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
+        String[] patterns = {"uniform", "black points", "black stripes"};
+        String[] colors = {"red", "yellow", "green", "blue"};
+        String[] wings = {"straight", "curved"};
+        int numberOfParents = 10;
 
-        Butterfly mother = new Butterfly("uniform", "red", "straight");
-        Butterfly father = new Butterfly("black points", "red", "curved");
-
-        BufferedReader bi = new BufferedReader(new InputStreamReader(System.in));
-
+        MendelLand mendel = new MendelLand(patterns, colors, wings, 5);
+        mendel.showStatistic();
     }
+
+
 }

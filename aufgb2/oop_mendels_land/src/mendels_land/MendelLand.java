@@ -1,163 +1,152 @@
 package mendels_land;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class MendelLand {
-    private Butterfly mother;
-    private Butterfly father;
-    private ChildPopulation children;
+    private int numberOfParents;
+    private String[] patterns;
+    private String[] colors;
+    private String[] shapes;
+    private ArrayList<Butterfly[]> parents;
+    private ArrayList<ChildPopulation> childPopulations;
+    private int totalNumberOfButterflies;
+    private Map<String, Integer> statistic;
 
-    private Map<String, ArrayList<String>> attributes;
 
     /**
      * Constructor of the mendelLand class.
      */
-    public MendelLand(){
-        System.out.println("Welcome to mendel land!");
-        this.attributes = new HashMap<String, ArrayList<String>>();
-        // fill map with attributes
-        allPatterns();
-        allWingColors();
-        allWingShapes();
+    public MendelLand(String[] patterns, String[] colors, String[] shapes, int numberOfParents){
+        // Basic parameters
+        this.numberOfParents = numberOfParents;
+        this.patterns = patterns;
+        this.colors = colors;
+        this.shapes = shapes;
 
-        // init main variables
-        this.mother = getParentAttributes("mother");
-        this.father = getParentAttributes("father");
-        this.children = new ChildPopulation(mother, father);
-    }
-
-    public MendelLand(Butterfly mother, Butterfly father){
-        System.out.println("Welcome to mendel land!");
-        this.attributes = new HashMap<String, ArrayList<String>>();
-        // fill map with attributes
-        allPatterns();
-        allWingColors();
-        allWingShapes();
-
-        // init main variables
-        this.mother = mother;
-        this.father = father;
-        this.children = new ChildPopulation(mother, father);
-    }
-
-    /**
-     * Getter for the child population.
-     * @return children
-     */
-    public ArrayList<Butterfly> getChildren() {
-        return children.getChildren();
-    }
-
-    /**
-     * Returns a butterfly with attributes from user input.
-     * @param parent    "mother" or "father"
-     * @return butterfly
-     */
-    private Butterfly getParentAttributes(String parent){
-        printAttributes();
-        System.out.printf("What are the attributes of the %s?\n", parent);
-
-        // ask for the three attributes of the actual parent
-        String inputPattern = validInput("Pattern");
-        String inputWingColor = validInput("Color");
-        String inputShapes = validInput("Shape");
-        return new Butterfly(inputPattern, inputWingColor, inputShapes);
-    }
-
-    /**
-     * Method to validate the user input. Will be used by another method as
-     * helper. Returns only attribute (string) if it is valid.
-     * @param attribute Current attribute
-     * @return selected attribute by user
-     */
-    private String validInput(String attribute){
-        Scanner scanner = new Scanner(System.in);
-        System.out.printf("%s: ", attribute);
-        // check with scanner, if entered name only contains letters and whitespace
-        Boolean checkValid = false;
-        while (!checkValid){
-            if (!scanner.hasNext("^[a-zA-Z]+")) {
-                System.out.printf("""
-                    You dont enter a valid attribute. Try again!
-                    %s Attribute (only letters): \s""", attribute);
-                scanner.next();
-            }
-
-            // check if attribute is valid, exists in map
-            String currentAttributeValue = scanner.next();
-            ArrayList<String> currentAttribute = this.attributes.get(attribute);
-            for (String attr : currentAttribute){
-                if (currentAttributeValue.equals(attr)){
-                    checkValid = true;
-                }
-            }
-
-            if (!checkValid){
-                System.out.printf("Your %s is not valid. See above for recommended %s.\n", attribute, attribute);
-                System.out.printf("%s: ", attribute);
-            }
+        // generate children and population
+        this.parents = generateRandomParents(numberOfParents);
+        this.childPopulations = generatePopulationByParents(parents);
+        this.totalNumberOfButterflies = 0;
+        for (ChildPopulation population : this.childPopulations){
+            this.totalNumberOfButterflies += population.getNumberOfButterflies();
         }
-        // return scanner.next() as input
-        return scanner.next();
+
+        this.statistic = new HashMap<String, Integer>();
     }
 
     /**
-     * List of all accepted patterns.
+     * Generate n random parents pairs.
+     * @param numParents Number of total parent pairs.
+     * @return parents  List of parents (pair of mother and father).
      */
-    private void allPatterns(){
-        ArrayList<String> patterns = new ArrayList<String>();
-        patterns.add("uniform");
-        patterns.add("black points");
-        patterns.add("black strips");
-        // add to map
-        this.attributes.put("Pattern", patterns);
+    private ArrayList<Butterfly[]> generateRandomParents(int numParents){
+        ArrayList<Butterfly[]> parents = new ArrayList<Butterfly[]>();
+        Random rand = new Random();
+        // generate random parents
+        while (numParents > 0){
+            Butterfly[] tmp = new Butterfly[2];
+            for (int i = 0; i < 2; i++){
+                String randomPattern = this.patterns[rand.nextInt(this.patterns.length)];
+                String randomColor = this.colors[rand.nextInt(this.colors.length)];
+                String randomWings = this.shapes[rand.nextInt(this.shapes.length)];
+
+                Butterfly butterfly = new Butterfly(randomPattern, randomColor, randomWings);
+                tmp[i] = butterfly;
+            }
+            parents.add(tmp);
+            numParents--;
+        }
+
+        return parents;
     }
 
     /**
-     * List of all accepted wing colors.
+     * Generate the whole population based on the input parent list. Is
+     * used by the constructor.
+     * @param parents   List of mothers and father. List-of-lists.
+     * @return population
      */
-    private void allWingColors(){
-        ArrayList<String> colors = new ArrayList<String>();
-        colors.add("red");
-        colors.add("yellow");
-        colors.add("green");
-        colors.add("blue");
-        // app to map
-        this.attributes.put("Color", colors);
+    private ArrayList<ChildPopulation> generatePopulationByParents(ArrayList<Butterfly[]> parents){
+        ArrayList<ChildPopulation> population = new ArrayList<>();
+        for (Butterfly[] butterflies : parents){
+            ChildPopulation children = new ChildPopulation(butterflies[0], butterflies[1]);
+            population.add(children);
+        }
+
+        return population;
     }
 
     /**
-     * List of all accepted wing shapes.
+     * Getter for the child populations.
+     * @return list An arraylist of all child populations.
      */
-    private void allWingShapes(){
-        ArrayList<String> shapes = new ArrayList<String>();
-        shapes.add("straight");
-        shapes.add("curved");
-        // add to map
-        this.attributes.put("Shape", shapes);
+    public ArrayList<ChildPopulation> getChildPopulations() {
+        return childPopulations;
     }
 
     /**
-     * Output the attributes that the butterflies should have.
+     * Getter for the total number of all butterflies in all populations.
+     * @return totalNumberOfButterflies
      */
-    private void printAttributes(){
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Recommended attributes of our butterflies (seperated by comma)");
-        for (String attribute : this.attributes.keySet()){
-            ArrayList<String> values = this.attributes.get(attribute);
-            System.out.printf("%s: ", attribute);
-            // just two print statements, just for the comma
-            for (int i = 0; i < values.size(); i++){
-                if (i != (values.size() - 1)){
-                    System.out.printf("%s, ", values.get(i));
+    public int getTotalNumberOfButterflies(){
+        return this.totalNumberOfButterflies;
+    }
+
+    /**
+     * Generate statistic based on the random population. Iterate threw all
+     * subpopulations from the different parents, select unique butterflies
+     * attributes and increase some counters.
+     */
+    private void generateStatistic(){
+        // iterate threw all subpopulations and count unique butterflies
+        for (int i = 0; i < this.numberOfParents; i++){
+            ChildPopulation population = this.childPopulations.get(i);
+
+            for (Butterfly butterfly : population.getChildren()) {
+                if (!statistic.containsKey(butterfly.toString())) {
+                    statistic.put(butterfly.toString(), 1);
                 } else {
-                    System.out.printf("%s\n", values.get(i));
+                    statistic.put(butterfly.toString(), statistic.get(butterfly.toString()) + 1);
                 }
             }
         }
-        System.out.println("-------------------------------------------------------------");
+    }
+
+
+    /**
+     * Print the statistic of the n populations based on the n parent pairs. The
+     * statistic contains the number of butterflies with the same attribute in
+     * total, the percentage of the total population and the corresponding
+     * attribute (patterns, colors and wings shapes).
+     */
+    public void showStatistic() {
+        System.out.printf("""
+                ************************************************************
+                **               WELCOME TO MENDEL LAND                   **
+                ************************************************************
+                Lets analyse %d population(s) with %d children in total.
+                """, this.numberOfParents, this.totalNumberOfButterflies);
+        this.generateStatistic();
+
+        if (!this.statistic.isEmpty()){
+            // sort the hashmap with a new list of Map.Entries, reverse afterwards
+            List<Map.Entry<String, Integer>> pairButterfly = new ArrayList<>(statistic.entrySet());
+            pairButterfly.sort(Map.Entry.comparingByValue());
+            Collections.reverse(pairButterfly);
+
+            System.out.print("""
+                    Statistic
+                    =======================================================
+                    Counts      percent     Butterflies attributes
+                    -------------------------------------------------------
+                    """);
+            for (Map.Entry<String, Integer> butterflyEntry : pairButterfly) {
+                float percent = (butterflyEntry.getValue() / (float) this.totalNumberOfButterflies) * 100;
+                System.out.printf("%-5d\t\t%.2f%%\t\t%s\n",
+                        butterflyEntry.getValue(), percent, butterflyEntry.getKey()
+                );
+            }
+        } else {
+            System.out.println("[Warning] No analysis performed yet. Something happened");
+        }
     }
 }

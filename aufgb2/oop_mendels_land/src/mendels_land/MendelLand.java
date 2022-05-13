@@ -1,4 +1,7 @@
 package mendels_land;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class MendelLand {
@@ -17,6 +20,7 @@ public class MendelLand {
      */
     public MendelLand(String[] patterns, String[] colors, String[] shapes, int numberOfParents){
         // Basic parameters
+        // SET BASIS CASES
         this.numberOfParents = numberOfParents;
         this.patterns = patterns;
         this.colors = colors;
@@ -147,6 +151,20 @@ public class MendelLand {
             }
         } else {
             System.out.println("[Warning] No analysis performed yet. Something happened");
+        }
+    }
+
+    public void mendelMain() {
+        this.showStatistic();
+
+        // user input for attribute
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("Should features be analyzed? [y/n] -> ");
+        try {
+            String input = reader.readLine();
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 }

@@ -13,6 +13,8 @@ public class Main {
         String[] wings = {"straight", "curved"};
         int numberOfParents = 10;
 
+        // TODO
+        // BASES CASES for MENDELLAND to check if attributes are empty
         MendelLand mendel = new MendelLand(patterns, colors, wings, 5);
         mendel.showStatistic();
     }

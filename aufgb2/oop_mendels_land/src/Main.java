@@ -16,7 +16,7 @@ public class Main {
         // TODO
         // BASES CASES for MENDELLAND to check if attributes are empty
         MendelLand mendel = new MendelLand(patterns, colors, wings, 5);
-        mendel.showStatistic();
+        mendel. mendelMain();
     }
 
 

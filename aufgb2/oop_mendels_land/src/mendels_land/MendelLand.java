@@ -115,36 +115,34 @@ public class MendelLand {
         }
     }
 
-
     /**
      * Print the statistic of the n populations based on the n parent pairs. The
      * statistic contains the number of butterflies with the same attribute in
      * total, the percentage of the total population and the corresponding
      * attribute (patterns, colors and wings shapes).
      */
-    public void showStatistic() {
-        System.out.printf("""
-                ************************************************************
-                **               WELCOME TO MENDEL LAND                   **
-                ************************************************************
-                Lets analyse %d population(s) with %d children in total.
-                """, this.numberOfParents, this.totalNumberOfButterflies);
-        this.generateStatistic();
-
-        if (!this.statistic.isEmpty()){
+    private void showStatistic(Map<String, Integer> statistic) {
+        if (!statistic.isEmpty()){
             // sort the hashmap with a new list of Map.Entries, reverse afterwards
             List<Map.Entry<String, Integer>> pairButterfly = new ArrayList<>(statistic.entrySet());
             pairButterfly.sort(Map.Entry.comparingByValue());
             Collections.reverse(pairButterfly);
 
-            System.out.print("""
-                    Statistic
+            // get total number of analysed butterflies
+            int numberOfButterflies = 0;
+            for (Map.Entry<String, Integer> uniqueButterfly : pairButterfly){
+                numberOfButterflies += uniqueButterfly.getValue();
+            }
+
+            System.out.printf("""
+
+                    Statistic for %d Butterflies
                     =======================================================
                     Counts      percent     Butterflies attributes
                     -------------------------------------------------------
-                    """);
+                    """, numberOfButterflies);
             for (Map.Entry<String, Integer> butterflyEntry : pairButterfly) {
-                float percent = (butterflyEntry.getValue() / (float) this.totalNumberOfButterflies) * 100;
+                float percent = (butterflyEntry.getValue() / (float) numberOfButterflies) * 100;
                 System.out.printf("%-5d\t\t%.2f%%\t\t%s\n",
                         butterflyEntry.getValue(), percent, butterflyEntry.getKey()
                 );
@@ -154,17 +152,55 @@ public class MendelLand {
         }
     }
 
+    private void generateAttributeStatistic(String attribute) {
+        // Generate sub list for a given attribute
+        Map<String, Integer> subStatistic = new HashMap<>();
+        for (String child : statistic.keySet()){
+            if (child.contains(attribute)){
+                subStatistic.put(child, statistic.get(child));
+            }
+        }
+        if (subStatistic.isEmpty()){
+            System.out.println("[Note] No butterflies contain your chosen attribute. Sorry.");
+        } else {
+            showStatistic(subStatistic);
+        }
+    }
+
     public void mendelMain() {
-        this.showStatistic();
+        System.out.printf("""
+                ************************************************************
+                **               WELCOME TO MENDEL LAND                   **
+                ************************************************************
+                Lets analyse %d population(s) with %d children in total.
+                """, this.numberOfParents, this.totalNumberOfButterflies);
+
+        this.generateStatistic();
+        this.showStatistic(this.statistic);
 
         // user input for attribute
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("Should features be analyzed? [y/n] -> ");
-        try {
-            String input = reader.readLine();
-
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.print("\nShould features be analyzed? [yes/no, y/n], Answer: ");
+            while (!scanner.hasNext("(y|yes|n|no)")) {
+                System.out.print("What did you say? Please answer yes/y or no/n. Answer:");
+                scanner.next();
+            }
+            String answer = scanner.next();
+            answer = answer.toLowerCase(); // get sure, that answer can be read (YES/NO)
+            if (answer.equals("yes") || answer.equals("y")) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+                System.out.print("Which attribute should be analysed: ");
+                try {
+                    String attributeAnswer = reader.readLine();
+                    generateAttributeStatistic(attributeAnswer);
+                } catch (IOException ex){
+                    System.out.println(ex.getMessage());
+                }
+            } else {
+                System.out.println("Thanks for using. Goodbye.");
+                System.exit(0);
+            }
         }
     }
 }

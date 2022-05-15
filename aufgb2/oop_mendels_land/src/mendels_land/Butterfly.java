@@ -43,6 +43,10 @@ public class Butterfly {
         return this.wingShape;
     }
 
+    /**
+     * Generate a string containing the attributes of the butterfly as name.
+     * @return butterfly name
+     */
     @Override
     public String toString(){
         return getPattern() + ", " + getWingColor() + ", " + getWingShape();
@@ -51,11 +55,10 @@ public class Butterfly {
     /**
      * Method to compare two butterflies by their attributes. Only returns
      * true of all attributes are equal.
-     * @param butterfly comparing butterflz
+     * @param butterfly comparing butterfly
      * @return  boolean
      */
     public boolean equals(Butterfly butterfly){
         return this.toString().equals(butterfly.toString());
     }
-
 }

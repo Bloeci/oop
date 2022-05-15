@@ -6,11 +6,8 @@ import java.util.*;
 
 public class MendelLand {
     private int numberOfParents;
-    private String[] patterns;
-    private String[] colors;
-    private String[] shapes;
-    private ArrayList<Butterfly[]> parents;
-    private ArrayList<ChildPopulation> childPopulations;
+    private List<Butterfly[]> parents;
+    private List<ChildPopulation> childPopulations;
     private int totalNumberOfButterflies;
     private Map<String, Integer> statistic;
 
@@ -18,49 +15,19 @@ public class MendelLand {
     /**
      * Constructor of the mendelLand class.
      */
-    public MendelLand(String[] patterns, String[] colors, String[] shapes, int numberOfParents){
+    public MendelLand(List<Butterfly[]> pairsOfParents){
         // Basic parameters
         // SET BASIS CASES
-        this.numberOfParents = numberOfParents;
-        this.patterns = patterns;
-        this.colors = colors;
-        this.shapes = shapes;
-
+        this.numberOfParents = pairsOfParents.size();
         // generate children and population
-        this.parents = generateRandomParents(numberOfParents);
+        this.parents = pairsOfParents;
         this.childPopulations = generatePopulationByParents(parents);
         this.totalNumberOfButterflies = 0;
         for (ChildPopulation population : this.childPopulations){
-            this.totalNumberOfButterflies += population.getNumberOfButterflies();
+            this.totalNumberOfButterflies += population.getNumberOfChildren();
         }
 
         this.statistic = new HashMap<String, Integer>();
-    }
-
-    /**
-     * Generate n random parents pairs.
-     * @param numParents Number of total parent pairs.
-     * @return parents  List of parents (pair of mother and father).
-     */
-    private ArrayList<Butterfly[]> generateRandomParents(int numParents){
-        ArrayList<Butterfly[]> parents = new ArrayList<Butterfly[]>();
-        Random rand = new Random();
-        // generate random parents
-        while (numParents > 0){
-            Butterfly[] tmp = new Butterfly[2];
-            for (int i = 0; i < 2; i++){
-                String randomPattern = this.patterns[rand.nextInt(this.patterns.length)];
-                String randomColor = this.colors[rand.nextInt(this.colors.length)];
-                String randomWings = this.shapes[rand.nextInt(this.shapes.length)];
-
-                Butterfly butterfly = new Butterfly(randomPattern, randomColor, randomWings);
-                tmp[i] = butterfly;
-            }
-            parents.add(tmp);
-            numParents--;
-        }
-
-        return parents;
     }
 
     /**
@@ -69,7 +36,7 @@ public class MendelLand {
      * @param parents   List of mothers and father. List-of-lists.
      * @return population
      */
-    private ArrayList<ChildPopulation> generatePopulationByParents(ArrayList<Butterfly[]> parents){
+    private List<ChildPopulation> generatePopulationByParents(List<Butterfly[]> parents){
         ArrayList<ChildPopulation> population = new ArrayList<>();
         for (Butterfly[] butterflies : parents){
             ChildPopulation children = new ChildPopulation(butterflies[0], butterflies[1]);
@@ -83,7 +50,7 @@ public class MendelLand {
      * Getter for the child populations.
      * @return list An arraylist of all child populations.
      */
-    public ArrayList<ChildPopulation> getChildPopulations() {
+    public List<ChildPopulation> getChildPopulations() {
         return childPopulations;
     }
 
@@ -100,7 +67,7 @@ public class MendelLand {
      * subpopulations from the different parents, select unique butterflies
      * attributes and increase some counters.
      */
-    private void generateStatistic(){
+    private void generateFullStatistic(){
         // iterate threw all subpopulations and count unique butterflies
         for (int i = 0; i < this.numberOfParents; i++){
             ChildPopulation population = this.childPopulations.get(i);
@@ -136,7 +103,7 @@ public class MendelLand {
 
             System.out.printf("""
 
-                    Statistic for %d Butterflies
+                    Statistic for %d Butterflies.
                     =======================================================
                     Counts      percent     Butterflies attributes
                     -------------------------------------------------------
@@ -147,11 +114,17 @@ public class MendelLand {
                         butterflyEntry.getValue(), percent, butterflyEntry.getKey()
                 );
             }
+            System.out.println("-------------------------------------------------------");
         } else {
             System.out.println("[Warning] No analysis performed yet. Something happened");
         }
     }
 
+    /**
+     * Generate a sub statistic for a selected attribute string based on the
+     * full population.
+     * @param attribute Selected attribute string to filter full population.
+     */
     private void generateAttributeStatistic(String attribute) {
         // Generate sub list for a given attribute
         Map<String, Integer> subStatistic = new HashMap<>();
@@ -167,7 +140,7 @@ public class MendelLand {
         }
     }
 
-    public void mendelMain() {
+    public void mendelLoop() {
         System.out.printf("""
                 ************************************************************
                 **               WELCOME TO MENDEL LAND                   **
@@ -175,22 +148,24 @@ public class MendelLand {
                 Lets analyse %d population(s) with %d children in total.
                 """, this.numberOfParents, this.totalNumberOfButterflies);
 
-        this.generateStatistic();
+        this.generateFullStatistic();
         this.showStatistic(this.statistic);
 
         // user input for attribute
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.print("\nShould features be analyzed? [yes/no, y/n], Answer: ");
+            System.out.print("\nShould features be analyzed? [yes/no, y/n],\nAnswer: ");
             while (!scanner.hasNext("(y|yes|n|no)")) {
-                System.out.print("What did you say? Please answer yes/y or no/n. Answer:");
+                System.out.print("What did you say? Please answer yes/y or no/n.\nAnswer:");
                 scanner.next();
             }
             String answer = scanner.next();
             answer = answer.toLowerCase(); // get sure, that answer can be read (YES/NO)
             if (answer.equals("yes") || answer.equals("y")) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-                System.out.print("Which attribute should be analysed: ");
+                System.out.print("""
+                        -------------------------------------------------------
+                        Which attribute should be analysed:\040""");
                 try {
                     String attributeAnswer = reader.readLine();
                     generateAttributeStatistic(attributeAnswer);
@@ -198,7 +173,7 @@ public class MendelLand {
                     System.out.println(ex.getMessage());
                 }
             } else {
-                System.out.println("Thanks for using. Goodbye.");
+                System.out.println("\nThanks for using. Goodbye.");
                 System.exit(0);
             }
         }

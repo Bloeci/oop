@@ -1,13 +1,14 @@
 package mendels_land;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class ChildPopulation {
     private int numberOfButterflies;
     private Butterfly mother;
     private Butterfly father;
-    private ArrayList<Butterfly> child;
+    private List<Butterfly> child;
 
     /**
      * Constructor of a new collection of butterfly children based on the
@@ -19,8 +20,7 @@ public class ChildPopulation {
     public ChildPopulation(Butterfly mother, Butterfly father){
         this.mother = mother;
         this.father = father;
-        this.numberOfButterflies = randomNumberChild();
-        // generate children population
+        this.numberOfButterflies = randomNumberOfChildren(1000, 2000);
         this.child = generateChildren();
     }
 
@@ -28,7 +28,7 @@ public class ChildPopulation {
      * Getter for the number of children.
      * @return number   Actual number of children
      */
-    public int getNumberOfButterflies() {
+    public int getNumberOfChildren() {
         return numberOfButterflies;
     }
 
@@ -37,7 +37,7 @@ public class ChildPopulation {
      * Getter for the actual children population.
      * @return children     List of butterfly children.
      */
-    public ArrayList<Butterfly> getChildren(){
+    public List<Butterfly> getChildren(){
         return this.child;
     }
 
@@ -63,9 +63,9 @@ public class ChildPopulation {
      * butterfly children.
      * @return  int     number of children
      */
-    private int randomNumberChild() {
+    public int randomNumberOfChildren(int min, int max) {
         // return (int)(Math.random() * (2000 + 1 - 1000)) + 1000;
-        return (int)(Math.random() * (2000 + 1 - 1000)) + 1000;
+        return (int)(Math.random() * (max + 1 - min)) + min;
     }
 
     /**
@@ -73,7 +73,7 @@ public class ChildPopulation {
      * @return butterflies   A list of butterfly children based on the
      *                      attributes of the mother and father.
      */
-    private ArrayList<Butterfly> generateChildren(){
+    private List<Butterfly> generateChildren(){
         String[] patterns = new String[]{this.mother.getPattern(), this.father.getPattern()};
         String[] colors = new String[]{this.mother.getWingColor(), this.father.getWingColor()};
         String[] shapes = new String[]{this.mother.getWingShape(), this.father.getWingShape()};

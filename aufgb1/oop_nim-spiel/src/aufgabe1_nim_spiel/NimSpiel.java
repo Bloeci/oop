@@ -17,7 +17,7 @@ public class NimSpiel {
      * Generate random number between 20-30 (inclusive) for number of stones.
      * @return  int     number of stones
      */
-    private int randomNumberStones() {
+    public int randomNumberStones() {
         return (int)(Math.random() * (30 + 1 - 20)) + 20;
     }
 
@@ -138,8 +138,10 @@ public class NimSpiel {
 
         // check with scanner, if entered name only contains letters and whitespace
         while (!scanner.hasNext("[a-zA-Z\s]+")) {
-            System.out.print("\nYou dont enter a valid name. Try again!\n" +
-                    "Enter your name (only letters): ");
+            System.out.print("""
+
+                    You dont enter a valid name. Try again!
+                    Enter your name (only letters):\s""");
             scanner.next();
         }
 
@@ -147,7 +149,7 @@ public class NimSpiel {
         return scanner.next();
     }
 
-    private void printStatistics() {
+    public void printStatistics() {
         System.out.printf("Total score after %d game(s):\n\tComputer\t%d\n\tPlayer %s \t%d\n\n", this.numberOfGames,
                 this.computer.getWonGames(), this.player.getName(), this.player.getWonGames());
     }
@@ -156,18 +158,20 @@ public class NimSpiel {
     /**
      * Print the rules of the 'nim spiel'.
      */
-    private static void printRules() {
+    public static void printRules() {
         String rules;
-        rules = "*******************************************************************************\n" +
-                "**                                 NIM SPIEL                                 **\n" +
-                "*******************************************************************************\n" +
-                "Goal: The goal of this game is not to have to take the last stone from a stack.\n" +
-                "Rules: \n" +
-                "  1) In every step each player must take at least one stone from the stack.\n" +
-                "  2) The maximum number of stones a player can take is 3.\n" +
-                "  3) The player, who takes the last stone, lose.\n" +
-                "  4) At the beginning of the game the first player is chosen at random.\n" +
-                "-------------------------------------------------------------------------------\n";
+        rules = """
+                *******************************************************************************
+                **                                 NIM SPIEL                                 **
+                *******************************************************************************
+                Goal: The goal of this game is not to have to take the last stone from a stack.
+                Rules:\s
+                  1) In every step each player must take at least one stone from the stack.
+                  2) The maximum number of stones a player can take is 3.
+                  3) The player, who takes the last stone, lose.
+                  4) At the beginning of the game the first player is chosen at random.
+                -------------------------------------------------------------------------------
+                """;
         System.out.println(rules);
     }
 }

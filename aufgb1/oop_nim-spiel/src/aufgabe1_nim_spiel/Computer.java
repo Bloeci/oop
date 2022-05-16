@@ -18,7 +18,7 @@ public class Computer extends Player {
         int optimal = (remainStones + 3) % 4;
         if (optimal == 0) {
             // chose random stones if computer can't choose optimal number
-            optimal = (int)(Math.random() * 3) + 1;
+            optimal = (int)(Math.random() * 2) + 1;
 
         }
         System.out.printf("The computer takes %d stone(s).\n", optimal);

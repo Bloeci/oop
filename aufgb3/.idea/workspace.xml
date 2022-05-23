@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e1e4fe35-e0ea-4262-b6ca-351dbd90012e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/aufgb3.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/daten/Gedicht.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oop_vignere_chiffre/CipherGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oop_vignere_chiffre/DeCipher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oop_vignere_chiffre/Exceptions/WrongCharacterException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oop_vignere_chiffre/Exceptions/WrongDatatypeException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oop_vignere_chiffre/IOFiles.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/aufgb3/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/aufgb3/.idea/aufgb3.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/aufgb3/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/aufgb3/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/aufgb3/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/aufgb3/6-vigenere-chiffre.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/aufgb3/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/aufgb3/brainstrom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/aufgb3/oop_vignere_chiffre/CipherGenerator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/aufgb3/oop_vignere_chiffre/DeCipher.class" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="29ZQRAwpDRl6IKsN0uIupLB0IhI" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e1e4fe35-e0ea-4262-b6ca-351dbd90012e" name="Changes" comment="" />
+      <created>1653318117969</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1653318117969</updated>
+      <workItem from="1653318120172" duration="45000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

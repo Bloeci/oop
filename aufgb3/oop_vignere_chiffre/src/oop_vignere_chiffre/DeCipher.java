@@ -68,12 +68,16 @@ public class DeCipher {
         int cipherLetterIndex;
         String cipherLine;
         for (int i = 0; i < inputFile.length(); i++) {
-            // actual cipher table line and index of actual text letter
-            cipherLine = this.cipherTable.get(i % this.keyword.length());
-            cipherLetterIndex = cipherLine.indexOf(inputFile.charAt(i));
+            if (Character.isLetter(inputFile.charAt(i))) {
+                // actual cipher table line and index of actual text letter
+                cipherLine = this.cipherTable.get(i % this.keyword.length());
+                cipherLetterIndex = cipherLine.indexOf(inputFile.charAt(i));
 
-            // reverse alphabet letter based on cipher letter index in line
-            alphabetLetter = this.alphabet.charAt(cipherLetterIndex);
+                // reverse alphabet letter based on cipher letter index in line
+                alphabetLetter = this.alphabet.charAt(cipherLetterIndex);
+            } else {
+                alphabetLetter = inputFile.charAt(i);
+            }
             decipheredText.append(alphabetLetter);
         }
 

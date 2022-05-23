@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"aufgabe1_nim_spiel","l":"Computer"},{"p":"aufgabe1_nim_spiel","l":"NimSpiel"},{"p":"aufgabe1_nim_spiel","l":"Player"}];updateSearchResults();

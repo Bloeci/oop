@@ -13,6 +13,10 @@ public class Player {
         this.isReel = false;
     }
 
+    /**
+     * Constructor of the player class.
+     * @param name name of the player
+     */
     public Player(String name) {
         this.name = name;
         this.wonGames = 0;

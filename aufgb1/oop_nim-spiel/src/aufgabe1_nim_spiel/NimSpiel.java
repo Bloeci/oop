@@ -9,6 +9,10 @@ public class NimSpiel {
     private Computer computer;
 
     public NimSpiel() {
+        /**
+         * Constructor of the nim game. Start the game with the
+         * method NimSpiel.startgame()
+         */
         this.numberStones = randomNumberStones();
         this.numberOfGames = 0;
     }
@@ -44,7 +48,7 @@ public class NimSpiel {
             printStatistics();
 
             // ask player if he/she wants to play another round
-            System.out.print("\n Do you wanna play another round? [yes/no, y/n]\n Answer:");
+            System.out.print("\nDo you wanna play another round? [yes/no, y/n]\nAnswer:");
             while (!scanner.hasNext("(y|yes|n|no)")) {
                 System.out.print("What did you say? Please answer yes/y or no/n.\n Answer:");
                 scanner.next();
@@ -119,7 +123,7 @@ public class NimSpiel {
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.printf("\nThe Game ends after %d rounds and the winner is:\n", rounds);
         if (winner.isReel()) {
-            System.out.printf("\t You! You have won %s. Congratulations!\n\n", winner.getName());
+            System.out.printf("\t You! You have won %s. Congratulations!\n", winner.getName());
         } else {
             System.out.println("\t ... the computer. Im sorry (Muhahaha).\n");
         }
@@ -150,7 +154,7 @@ public class NimSpiel {
     }
 
     public void printStatistics() {
-        System.out.printf("Total score after %d game(s):\n\tComputer\t%d\n\tPlayer %s \t%d\n\n", this.numberOfGames,
+        System.out.printf("Total score after %d game(s):\n\tComputer\t\t\t%d\n\t%-15s \t%d\n\n", this.numberOfGames,
                 this.computer.getWonGames(), this.player.getName(), this.player.getWonGames());
     }
 

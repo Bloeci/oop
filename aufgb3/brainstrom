@@ -1,0 +1,24 @@
+main()
+{
+	String eingabeDatei = 'gedicht.txt'
+	String ausgabeDatei = "ergebnis.txt"
+	
+	String schluesel = 'scheune'
+	Chiffre chffrierer = new Chiffre(eingabeDatei, ausgabeDatei)
+	chiffere.coding(schluessel)
+	
+	# Datei wurde geschrieben, chiffriert
+	
+	Dechiffriere dechiffre = new Dechiffre(geheiTextDatei, ausgabeDatei2)
+	dichiffre.decoding(schluessel)
+	
+}
+
+chiffreirerKlasse
+dechiffrerKlasse
+
+IOKlasse -> eingabe ausgabe in datei
+
+
+
+

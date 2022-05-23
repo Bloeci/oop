@@ -13,8 +13,8 @@ public class DeCipher {
      * @param keyword   Used keyword to generate table.
      */
     public DeCipher (String keyword) {
-        this.cipherTable = new CipherTable().generateCipherTable(keyword);
-        this.keyword = keyword;
+        this.keyword = keyword.toLowerCase().replaceAll("\\s+", "");
+        this.cipherTable = CipherTable.generateCipherTable(keyword);
     }
 
     /**
@@ -36,7 +36,6 @@ public class DeCipher {
 
     public void decipherText(String inputFile, String outputFile){
         StringBuilder decipheredText = new StringBuilder();
-
         char alphabetLetter;
         int cipherLetterIndex;
         String cipherLine;

@@ -9,7 +9,7 @@ public class CipherTable {
      */
     public static ArrayList<String> generateCipherTable(String keyword){
         keyword = keyword.toLowerCase().replaceAll("\\s+", "");
-        validateKeyword(keyword);
+        // validateKeyword(keyword);
 
         String alphabet = "abcdefghijklmnopqrstuvwxyz";
         ArrayList<String> cipher = new ArrayList<>(keyword.length());

@@ -8,32 +8,15 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args){
-        DeCipher cipher = new DeCipher("scheune");
+        DeCipher deCipher = new DeCipher("scheune");
 
-        for (String line : cipher.getCipherTable()){
-            System.out.println(line);
-        }
-        System.out.println("\n\n");
-
+        /*
         String content = "polalphabetisch";
         System.out.println(content);
         String cipherText = cipherAText(content, cipher.getKeyword());
         cipher.decipherText(cipherText, "hello");
-
-
-        /*IOFiles f = new IOFiles();
-        try{
-            String content = f.readFile("daten/Gedicht.txt");
-            // System.out.println(content);
-            String cipherText = cipherAText(content, cipher.getKeyword());
-            f.writeFile("gedicht_cipher.txt", cipherText);
-
-            cipher.decipherText(cipherText, "hello");
-
-        } catch (WrongDatatypeException | WrongCharacterException e) {
-            System.out.println(e.getMessage());
-            System.exit(1);
-        }*/
+        */
+        deCipher.decipherText("daten/gedicht_cipher.txt", "test01.txt");
     }
 
     /**

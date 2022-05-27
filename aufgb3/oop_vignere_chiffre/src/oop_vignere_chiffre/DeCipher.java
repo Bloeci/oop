@@ -33,26 +33,34 @@ public class DeCipher {
         return this.cipherTable;
     }
 
+    /**
+     * Read the cipher text from a specified input file and writ the
+     * deciphered text to an output file (plus output to the console)
+     * @param inputFile     Name of the given cipher text.
+     * @param outputFile    Name of the new output file.
+     */
+    public void decipherText(String inputFile, String outputFile) {
+        String fileContent = IOFiles.readFile(inputFile);
 
-    public void decipherText(String inputFile, String outputFile){
         StringBuilder decipheredText = new StringBuilder();
         char alphabetLetter;
         int cipherLetterIndex;
         String cipherLine;
-        for (int i = 0; i < inputFile.length(); i++) {
-            if (Character.isLetter(inputFile.charAt(i))) {
+        for (int i = 0; i < fileContent.length(); i++) {
+            if (Character.isLetter(fileContent.charAt(i))) {
                 // actual cipher table line and index of actual text letter
                 cipherLine = this.cipherTable.get(i % this.keyword.length());
-                cipherLetterIndex = cipherLine.indexOf(inputFile.charAt(i));
+                cipherLetterIndex = cipherLine.indexOf(fileContent.charAt(i));
 
                 // reverse alphabet letter based on cipher letter index in line
                 alphabetLetter = this.alphabet.charAt(cipherLetterIndex);
             } else {
-                alphabetLetter = inputFile.charAt(i);
+                alphabetLetter = fileContent.charAt(i);
             }
             decipheredText.append(alphabetLetter);
         }
 
         System.out.println(decipheredText);
+        IOFiles.writeFile(outputFile, decipheredText.toString());
     }
 }

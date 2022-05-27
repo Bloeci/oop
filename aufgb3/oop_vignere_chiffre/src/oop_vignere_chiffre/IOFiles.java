@@ -11,9 +11,9 @@ public class IOFiles {
     /**
      * Check given filename if it is .txt file
      * @param filename  Given filename
-     * @throws WrongDatatypeException
+     * @throws WrongDatatypeException   Simple Exception (no big impact)
      */
-    private void checkFiletype (String filename)
+    private static void checkFiletype(String filename)
         throws WrongDatatypeException
     {
         if (!filename.toLowerCase().endsWith(".txt")){
@@ -27,7 +27,7 @@ public class IOFiles {
      * @param nc    String (character)
      * @return nc   replaced String if contain german special letter
      */
-    private String replaceGermanCharacter (String nc){
+    private static String replaceGermanCharacter (String nc){
         nc = switch (nc) {
             case "ä" -> "ae";
             case "ö" -> "oe";
@@ -42,15 +42,15 @@ public class IOFiles {
      * Process given character by checking if char is letter, defined or german
      * special character ('Umlaute'). Returns the character as String if valid or
      * threw an exception.
-     * @param character
+     * @param character         A single character.
      * @return newCharacter     Processed character as string (bc. "ä" -> "ae")
      * @throws WrongCharacterException  Character if not defined
      */
 
-    private String processCharacter (char character)
+    private static String processCharacter (char character)
             throws WrongCharacterException
     {
-        String nc = "";
+        String nc;
         if (Character.isLetter(character)){
             nc = String.valueOf(Character.toLowerCase(character));
             nc = replaceGermanCharacter(nc);
@@ -69,7 +69,7 @@ public class IOFiles {
      * process to a std charset.
      * @param line  Line from file
      */
-    private String processLine (String line)
+    private static String processLine (String line)
             throws WrongCharacterException
     {
         char currentChar;
@@ -82,15 +82,11 @@ public class IOFiles {
     }
 
     /**
-     * Read the given filename and return string as content.
-     * @param filename
-     * @return content  String of
-     * @throws WrongDatatypeException
-     * @throws WrongCharacterException
+     * Read the given filename and return content as string.
+     * @param filename  String of the filename
+     * @return content  String of the file content
      */
-    public String readFile (String filename)
-        throws WrongDatatypeException, WrongCharacterException
-    {
+    public static String readFile (String filename) {
         File inputFile = new File(filename);
         int currentLine = 1;
         StringBuilder content = new StringBuilder();
@@ -103,7 +99,7 @@ public class IOFiles {
             String line;
             while ((line = bufferedReader.readLine()) != null){
                 line = processLine(line);
-                content.append(line).append(' ');
+                content.append(line).append('\n');
                 currentLine++;
             }
 
@@ -120,8 +116,15 @@ public class IOFiles {
             ioex.printStackTrace();
             System.exit(1);
 
-        } catch (WrongCharacterException wc) {
-            throw new WrongCharacterException(filename, currentLine);
+        } catch (WrongDatatypeException ex) {
+            WrongDatatypeException wd = new WrongDatatypeException(filename);
+            System.err.println(wd.getMessage());
+            System.exit(1);
+
+        } catch (WrongCharacterException ex) {
+            WrongCharacterException wc = new WrongCharacterException(filename, currentLine);
+            System.err.println(wc.getMessage());
+            System.exit(1);
         }
 
         return content.toString();
@@ -132,12 +135,13 @@ public class IOFiles {
      * @param filename  Target filename which would be written.
      * @param content   Given content for the file as string.
      */
-    public void writeFile (String filename, String content) {
+    public static void writeFile (String filename, String content) {
         // Create output directory, if not exist
         // File directory = new File(System.getProperty("user.dir") + "/ausgabe");
         // if (!directory.exists()) { directory.mkdir();}
 
         // Create File and write output (try-Block)
+        System.out.printf("[Process] Write text to '%s'\n", filename);
         File newFile = new File(filename);
         try {
             FileWriter fileWriter = new FileWriter(newFile);
@@ -149,9 +153,9 @@ public class IOFiles {
             printWriter.close();
             bufferedWriter.close();
             fileWriter.close();
-        } catch (IOException ioex) {
+        } catch (IOException ioEx) {
             System.err.println("[ERROR] Something happened during Input/Output. Exit.");
-            ioex.printStackTrace();
+            ioEx.printStackTrace();
             System.exit(1);
         }
     }

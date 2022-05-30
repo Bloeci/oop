@@ -3,6 +3,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MendelLand {
     private int numberOfParents;
@@ -128,8 +130,14 @@ public class MendelLand {
     private void generateAttributeStatistic(String attribute) {
         // Generate sub list for a given attribute
         Map<String, Integer> subStatistic = new HashMap<>();
+
+        attribute = attribute.toLowerCase();
+        String regex = "\\b" + attribute + "\\b";
+
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+
         for (String child : statistic.keySet()){
-            if (child.contains(attribute)){
+            if (pattern.matcher(child).find()){
                 subStatistic.put(child, statistic.get(child));
             }
         }

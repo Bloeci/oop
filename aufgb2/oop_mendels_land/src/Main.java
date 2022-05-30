@@ -7,11 +7,28 @@ import java.util.Random;
 public class Main {
     public static void main(String[] args) {
 
+        // ArrayList<Butterfly[]> parents = generateParents();
+
         int numberOfParents = 10;
         ArrayList<Butterfly[]> pairsOfParents = generateRandomParents(numberOfParents);
 
         MendelLand mendel = new MendelLand(pairsOfParents);
         mendel.mendelLoop();
+    }
+
+    /**
+     * Generate one pair of parents.
+     * @return parents
+     */
+    public static ArrayList<Butterfly[]> generateParents() {
+        Butterfly mother = new Butterfly("uniform","green", "curved");
+
+        Butterfly father = new Butterfly("black points", "yellow", "straight");
+
+        Butterfly[] parent = {mother, father};
+        ArrayList<Butterfly[]> parents = new ArrayList<>();
+        parents.add(parent);
+        return parents;
     }
 
     /**
@@ -24,7 +41,7 @@ public class Main {
         String[] colors = {"red", "yellow", "green", "blue"};
         String[] shapes = {"straight", "curved"};
 
-        ArrayList<Butterfly[]> parents = new ArrayList<Butterfly[]>();
+        ArrayList<Butterfly[]> parents = new ArrayList<>();
         Random rand = new Random();
         // generate random parents
         while (numParents > 0){
@@ -43,6 +60,4 @@ public class Main {
 
         return parents;
     }
-
-
 }

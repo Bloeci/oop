@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Generate a population based on a mother and a father butterfly.
+ */
 public class ChildPopulation {
     private int numberOfButterflies;
     private Butterfly mother;
@@ -34,7 +37,7 @@ public class ChildPopulation {
 
 
     /**
-     * Getter for the actual children population.
+     * Getter for the actual children population.black
      * @return children     List of butterfly children.
      */
     public List<Butterfly> getChildren(){

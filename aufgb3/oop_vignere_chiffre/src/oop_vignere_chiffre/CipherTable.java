@@ -37,7 +37,7 @@ public class CipherTable {
      * Validate the given keyword by an arbitrary scaling.
      * @param keyword   The given keyword. Only letters.
      */
-    private static void validateKeyword(String keyword){
+    public static void validateKeyword(String keyword){
         StringBuilder temp= new StringBuilder();
         for (int i = 0; i < keyword.length(); i++) {
             if (temp.toString().indexOf(keyword.charAt(i)) == -1 ) {

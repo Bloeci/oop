@@ -6,6 +6,9 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Main class of this project to process butterfly populations.
+ */
 public class MendelLand {
     private int numberOfParents;
     private List<Butterfly[]> parents;
@@ -132,8 +135,7 @@ public class MendelLand {
         Map<String, Integer> subStatistic = new HashMap<>();
 
         attribute = attribute.toLowerCase();
-        String regex = "\\b" + attribute + "\\b";
-
+        String regex = "^" + attribute + "$";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 
         for (String child : statistic.keySet()){

@@ -9,7 +9,7 @@ public class Main {
 
         // ArrayList<Butterfly[]> parents = generateParents();
 
-        int numberOfParents = 10;
+        int numberOfParents = 6;
         ArrayList<Butterfly[]> pairsOfParents = generateRandomParents(numberOfParents);
 
         MendelLand mendel = new MendelLand(pairsOfParents);

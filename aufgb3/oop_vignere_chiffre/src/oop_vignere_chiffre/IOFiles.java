@@ -13,7 +13,7 @@ public class IOFiles {
      * @param filename  Given filename
      * @throws WrongDatatypeException   Simple Exception (no big impact)
      */
-    private static void checkFiletype(String filename)
+    private void checkFiletype(String filename)
         throws WrongDatatypeException
     {
         if (!filename.toLowerCase().endsWith(".txt")){
@@ -27,7 +27,7 @@ public class IOFiles {
      * @param nc    String (character)
      * @return nc   replaced String if contain german special letter
      */
-    private static String replaceGermanCharacter (String nc){
+    private String replaceGermanCharacter (String nc){
         nc = switch (nc) {
             case "ä" -> "ae";
             case "ö" -> "oe";
@@ -47,7 +47,7 @@ public class IOFiles {
      * @throws WrongCharacterException  Character if not defined
      */
 
-    private static String processCharacter (char character)
+    private String processCharacter (char character)
             throws WrongCharacterException
     {
         String nc;
@@ -69,7 +69,7 @@ public class IOFiles {
      * process to a std charset.
      * @param line  Line from file
      */
-    private static String processLine (String line)
+    private String processLine (String line)
             throws WrongCharacterException
     {
         char currentChar;
@@ -86,7 +86,7 @@ public class IOFiles {
      * @param filename  String of the filename
      * @return content  String of the file content
      */
-    public static String readFile (String filename) {
+    public String readFile (String filename) {
         File inputFile = new File(filename);
         int currentLine = 1;
         StringBuilder content = new StringBuilder();
@@ -135,7 +135,7 @@ public class IOFiles {
      * @param filename  Target filename which would be written.
      * @param content   Given content for the file as string.
      */
-    public static void writeFile (String filename, String content) {
+    public void writeFile (String filename, String content) {
         // Create output directory, if not exist
         // File directory = new File(System.getProperty("user.dir") + "/ausgabe");
         // if (!directory.exists()) { directory.mkdir();}

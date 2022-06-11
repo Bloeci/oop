@@ -40,7 +40,9 @@ public class DeCipher {
      * @param outputFile    Name of the new output file.
      */
     public void decipherText(String inputFile, String outputFile) {
-        String fileContent = IOFiles.readFile(inputFile);
+        IOFiles fileHandling = new IOFiles();
+
+        String fileContent = fileHandling.readFile(inputFile);
 
         StringBuilder decipheredText = new StringBuilder();
         char alphabetLetter;
@@ -61,6 +63,6 @@ public class DeCipher {
         }
 
         System.out.println(decipheredText);
-        IOFiles.writeFile(outputFile, decipheredText.toString());
+        fileHandling.writeFile(outputFile, decipheredText.toString());
     }
 }

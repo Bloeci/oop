@@ -1,5 +1,8 @@
 package mendels_land;
 
+/**
+ * Butterfly class with their corresponding attributes.
+ */
 public class Butterfly {
     private String pattern;
     private String wingColor;

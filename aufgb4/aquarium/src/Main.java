@@ -1,13 +1,25 @@
+import oop_aquarium.Aquarium;
 import oop_aquarium.Fish;
 
 import java.util.ArrayList;
 
 public class Main {
     public static void main(java.lang.String[] args) {
+        ArrayList<Fish> tmp = generateFishes();
 
+        Aquarium aquarium = new Aquarium(tmp);
+        aquarium.generateOptimalList(270);
+
+        for (ArrayList<Fish> fishes : aquarium.getRecursiveFishList()){
+            System.out.print('[');
+            for (Fish fish : fishes){
+                System.out.printf("%s, ", fish.getName());
+            }
+            System.out.println("]");
+        }
     }
 
-    private ArrayList<Fish> generateFishes() {
+    private static ArrayList<Fish> generateFishes() {
         String grueneMigraene = "Gruene Migraene";
         String korallenqualle = "Korallenqualle";
         String schuppenschatulle = "Schuppenschatulle";

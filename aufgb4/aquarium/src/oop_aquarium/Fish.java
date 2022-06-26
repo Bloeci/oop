@@ -41,4 +41,10 @@ public class Fish {
     public String[] getIntolerance(){
         return this.intolerance;
     }
+
+    @Override
+    public String toString(){
+        return this.name + ", Price: " + this.price;
+//        return this.name;
+    }
 }

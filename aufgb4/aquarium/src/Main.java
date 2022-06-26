@@ -8,15 +8,8 @@ public class Main {
         ArrayList<Fish> tmp = generateFishes();
 
         Aquarium aquarium = new Aquarium(tmp);
-        aquarium.generateOptimalList(270);
+        aquarium.generateShoppingList(200);
 
-        for (ArrayList<Fish> fishes : aquarium.getRecursiveFishList()){
-            System.out.print('[');
-            for (Fish fish : fishes){
-                System.out.printf("%s, ", fish.getName());
-            }
-            System.out.println("]");
-        }
     }
 
     private static ArrayList<Fish> generateFishes() {

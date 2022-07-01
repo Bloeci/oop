@@ -34,9 +34,22 @@ public class Aquarium {
             ArrayList<ArrayList<Fish>> partlyResult = new ArrayList<>();
             partlyResult = addFish(currentFishList, this.fishes, price - startFish.getPrice(), partlyResult);
 
+            // find (one) list with maximum length
+            int maxLength = 0;
             for (ArrayList<Fish> actualResult : partlyResult){
-                System.out.println(actualResult.toString());
+                if (actualResult.size() > maxLength){
+                    maxLength = actualResult.size();
+                }
+                // System.out.println(actualResult.toString());
             }
+
+            System.out.printf("maximum length:%d\n", maxLength);
+            for (ArrayList<Fish> actualResult : partlyResult){
+                if (actualResult.size() == maxLength){
+                    System.out.println(actualResult.toString());
+                }
+            }
+
             System.out.println();
         }
     }

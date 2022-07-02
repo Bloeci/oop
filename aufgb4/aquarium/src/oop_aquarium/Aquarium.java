@@ -1,8 +1,6 @@
 package oop_aquarium;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.stream.Collectors;
+import java.util.*;
 
 /**
  * Class to generate a shopping list of fishes based on tolerances.
@@ -20,33 +18,49 @@ public class Aquarium {
     }
 
     /**
-     * Generate optimal lists for a given price, which are tolerated each other,
+     * Generate optimal lists for a given price, which are tolerated each other. Only
+     * prints all unique lists with respect to order
      * @param price Maximum money to buy fishes.
      */
-    public void generateShoppingList(int price){
-        ArrayList<ArrayList<Fish>> result = new ArrayList<>();
-
+    public void generateShoppingList(int price, boolean onlyUnique){
+        System.out.printf("""
+                --------------------------------------
+                |     Welcome to the fish market     |
+                --------------------------------------
+                Your budget: %d
+                
+                """, price);
         for (Fish startFish : this.fishes) {
             ArrayList<Fish> currentFishList = new ArrayList<>();
             currentFishList.add(startFish);
-            System.out.println(startFish.toString());
+            System.out.printf("Start fish: %s\n", startFish.getName());
 
+            // recursive call to generate all fish lists
             ArrayList<ArrayList<Fish>> partlyResult = new ArrayList<>();
             partlyResult = addFish(currentFishList, this.fishes, price - startFish.getPrice(), partlyResult);
 
-            // find (one) list with maximum length
-            int maxLength = 0;
-            for (ArrayList<Fish> actualResult : partlyResult){
-                if (actualResult.size() > maxLength){
-                    maxLength = actualResult.size();
+            // remove all duplicate lists using sets, copy partyResult and remove duplicates
+            if (onlyUnique) {
+                ArrayList<ArrayList<Fish>> finalResult = new ArrayList<>(partlyResult);
+                ArrayList<HashSet<Fish>> uniques = new ArrayList<>();
+                HashSet<Fish> actualFishList;
+                for (ArrayList<Fish> fishList : partlyResult) {
+                    actualFishList = new HashSet<>(fishList);
+                    if (!uniques.contains(actualFishList)) {
+                        uniques.add(actualFishList);
+                    } else {
+                        finalResult.remove(fishList);
+                    }
                 }
-                // System.out.println(actualResult.toString());
-            }
 
-            System.out.printf("maximum length:%d\n", maxLength);
-            for (ArrayList<Fish> actualResult : partlyResult){
-                if (actualResult.size() == maxLength){
-                    System.out.println(actualResult.toString());
+                // print unique final list
+                for (ArrayList<Fish> l : finalResult) {
+                    System.out.println(l.toString());
+                }
+            } else {
+                // print the complete list of all recursive results
+                for (ArrayList<Fish> l : partlyResult){
+                    System.out.println(l.toString());
                 }
             }
 

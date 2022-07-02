@@ -21,6 +21,7 @@ public class Aquarium {
      * Generate optimal lists for a given price, which are tolerated each other. Only
      * prints all unique lists with respect to order
      * @param price Maximum money to buy fishes.
+     * @param onlyUnique Boolean value to print all generated or just unique lists
      */
     public void generateShoppingList(int price, boolean onlyUnique){
         System.out.printf("""

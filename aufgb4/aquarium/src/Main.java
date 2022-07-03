@@ -8,7 +8,7 @@ public class Main {
         ArrayList<Fish> tmp = generateFishes();
 
         Aquarium aquarium = new Aquarium(tmp);
-        aquarium.generateShoppingList(100, true);
+        aquarium.generateShoppingList(300, true);
 
     }
 

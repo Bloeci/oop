@@ -1,5 +1,9 @@
 package oop_aquarium;
 
+/**
+ * Fish class with attributes like a name, a price and a list of
+ * intolerant fishes.
+ */
 public class Fish {
     private java.lang.String name;
     private int price;
@@ -44,7 +48,7 @@ public class Fish {
 
     @Override
     public String toString(){
-        return this.name + ", Price: " + this.price;
+        return this.name + " - Price: " + this.price;
 //        return this.name;
     }
 }
